@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+service Broadcast {
+    rpc send(SendRequest) returns (BroadcastMessage) {}
+    rpc subscribe(SubscribeRequest) returns (stream BroadcastMessage) {}
+}
+
+enum Category {
+    ALL = 0;
+    MISC = 1;
+    KUDOS = 2;
+    ANNOUNCEMENT = 3;
+}
+
+message SendRequest {
+    string message = 1;
+    Category category = 2;
+}
+
+message BroadcastMessage {
+    string id = 1;
+    string message = 2;
+    Category category = 3;
+}
+
+message SubscribeRequest {
+    Category category = 1;
+}
